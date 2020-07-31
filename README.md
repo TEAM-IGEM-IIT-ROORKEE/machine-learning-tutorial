@@ -57,3 +57,74 @@ print('List of Antibioitcs - Sample')
 print(conditions)
 conditions = np.array(conditions)
 ```
+
+**Dataset Preprocessing**
+
+The given dataset is preprocessed using **quantile normalization** to make all different distributions identical
+
+The drug-gene interaction scores less than -2 were considered significant for any particular drug and gene pair. Hence, this conversion leads to formation of a binary dataset. The binary dataset of above sample of chemogenomic profile is displayed below,
+
+![alt text](https://drive.google.com/uc?export=view&id=1F3EUDFeaH294haLMMMrNOiIRr2x77F3t)
+
+Due to this preprocessing, the number of genes in the dataset are reduced to 3853 from 3979, since for 126 genes, there was not even a single drug condition, for whom there is no significant interaction score *i.e.* less than -2.
+
+Try to run either A or B part below.
+B is just an extended version of A, *i.e.* the arrays used in A were obtained after running code part B
+
+**Part A**
+```
+plist = np.empty_like(probelist)
+    
+for i in range(probelist.shape[0]):
+    tem = probelist[i].split('-')
+    try:
+        plist[i] = tem[1]
+    except:
+        plist[i] = tem[0]
+
+#already quantile normalized data
+pnum_array = loadmat('./preprocessed.mat') #importing data from matlab after quantile normalization processing
+phenotype_num = np.array(pnum_array['phenotype_num'])
+```
+
+**Part B**
+```
+#usual preprocessing technique 
+#it would take a lot of time, so skipping this part by utilizing the end product iself
+
+cell_z1_list = [] #to capture the list of genes which are more sensitive
+lte = [] #to capture list of such genes for every particular condition
+list_phenotype = [] #to find the unique list of such genes
+
+for i in range(phenotype_num.shape[-1]):
+    te = plist[phenotype_num[:,i]<-1*z] # for particular condition, finding the most important genes
+    cell_z1_list.append(te) # appending list of such genes in list
+    lte.append(len(te)) # keeping in account the number of such genes for particular condition
+    for j in range(len(te)): 
+        list_phenotype.append(te[j]) # for finding the number of such genes in the whole dataset
+        
+np_array = np.array(list_phenotype)
+phenotype_labels = np.unique(np_array) #list of genes in whole dataset
+
+nichols_t = np.zeros((phenotype_labels.shape[0],phenotype_num.shape[-1])) #storing binary dataset
+
+for i in range(nichols_t.shape[0]):
+    for j in range(nichols_t.shape[-1]):
+        for k in range(len(cell_z1_list[j])):    
+            if phenotype_labels[i] == cell_z1_list[j][k]:
+                nichols_t[i,j] = 1
+                
+phenotype_data = np.copy(nichols_t)
+```
+
+```
+#phenotype_data : interaction scores between drugs and genes
+phenotype_data = np.load('./phenotype_data.npy')
+```
+
+```
+#phenotype_labels : labels of different genes which have atleast one significant interaction with drugs
+phenotype_labels = np.load('./phenotype_labels.npy')
+```
+
+
