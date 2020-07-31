@@ -250,6 +250,78 @@ valchemgen = phenotype_data[:,val_pos]
 valchemgen = valchemgen.astype(np.uint8)
 ```
 
+**Conversion into Sigma and Delta scores**
+
+The preprocessed binary data is converted to **sigma** and **delta** scores. **Sigma** score is used to count for similarity between drugs while **Delta** score is used to count for uniqueness between drugs.
+
+The exact procedure of calculating sigma and delta scores is shown below,
+
+![alt text](https://drive.google.com/uc?export=view&id=1Lpak8CzvsgxH7qKSVM4CkuIMcqma5H0r)
+
+From the above figure, it is very clear that,
+*sigma* score is calculated by addition of while *delta* score is calculated by checking uniqueness in chemogenomic profiles of individual antibiotics
+
+**Drug Combination Representation**
+
+Since there were 3853 genes present in preprocessed dataset, so there are corresponding 3853 sigma scores and 3853 delta scores *i.e.* total of 7706 scores. Therefore, a particular drug combination can be represented by feature vector of dimensions 7706. 
+
+```
+#training dataset
+
+xtrain = []
+ytrain = []
+for i in range(train_interactions.shape[0]):
+    ix1 = []
+    list_drugs = train_interactions[i]
+    for d in list_drugs:
+        if d in traindrugs:
+            index = np.where(traindrugs==d)[0][0]
+            ix1.append(index)
+
+    t1 = trainchemgen[:,ix1[0]]
+    t2 = trainchemgen[:,ix1[1]]
+    sigma = t1 + t2 #calculating similarity
+    delta = t1 + t2 
+    delta[delta!=1] = 0 #calculating uniqueness
+
+    t3 = np.concatenate((sigma,delta),axis=0)
+    
+    xtrain.append(t3)
+    ytrain.append(train_scores[i])
+
+xtrain = np.array(xtrain)
+ytrain = np.array(ytrain)
+```
+
+```
+#validation dataset
+
+xval = []
+yval = []
+
+for i in range(val_interactions.shape[0]):
+    ix1 = []
+    list_drugs = val_interactions[i]
+    for d in list_drugs:
+        if d in valdrugs:
+            index = np.where(valdrugs==d)[0][0]
+            ix1.append(index)
+
+    t1 = valchemgen[:,ix1[0]]
+    t2 = valchemgen[:,ix1[1]]
+    sigma = t1 + t2
+    delta = t1 + t2
+    delta[delta==2] = 0
+    t3 = np.concatenate((sigma,delta),axis=0)
+    
+    xval.append(t3)
+    yval.append(val_scores[i])
+
+xval = np.array(xval)
+yval = np.array(yval)
+```
+
+
 
 
 
