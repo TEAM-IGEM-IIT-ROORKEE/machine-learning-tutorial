@@ -11,6 +11,8 @@
 - The following documentation is similar to of google colab with mixture of code snippets and necessary explanations. In case you dont want to use google colan, we would recommend to go through the below documentation for better understanding. 
 - All necessary data files are in the repository itself, along with python file for the code.
 
+*In case of any doubts, queries, suggestions, feel free to reach out to us at igem@iitr.ac.in and on our Facebook and Instagram pages*
+
 **Dependencies**
 - Python 3.7
 - Numpy
