@@ -6,7 +6,10 @@
 
 **The link to the google colab notebook, [here](https://colab.research.google.com/drive/1NVUAwgoObyp-GtzC754SoPZKzVZ713oB)**
 
-The following documentation is similar to of google colab with mixture of code snippets and necessary explanations. We would recommend to go through the below documentation for better understanding. All necessary data files are in the repository itself, along with python file for the code.
+**Some Important Instructions**
+- After opening colab notebook, we would suggest to create its copy for yourself followed by uploading all necessary data files. Then you are good to go.
+- The following documentation is similar to of google colab with mixture of code snippets and necessary explanations. In case you dont want to use google colan, we would recommend to go through the below documentation for better understanding. 
+- All necessary data files are in the repository itself, along with python file for the code.
 
 **Dependencies**
 - Python 3.7
