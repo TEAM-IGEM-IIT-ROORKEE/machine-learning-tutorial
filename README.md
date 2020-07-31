@@ -4,6 +4,18 @@
 
 **The link to the presentation, [here](https://docs.google.com/presentation/d/1PHBz7g_uvkript21ROB1X8EltrD39bWBa56pXOJ5rC4/edit?usp=sharing)** 
 
+**The link to the google colab notebook, [here](https://colab.research.google.com/drive/1NVUAwgoObyp-GtzC754SoPZKzVZ713oB)**
+
+The following documentation is similar to of google colab with mixture of code snippets and necessary explanations. We would recommend to go through the below documentation for better understanding. All necessary data files are in the repository itself, along with python file for the code.
+
+**Dependencies**
+- Python 3.7
+- Numpy
+- Pandas
+- Scipy
+- Scikit-Learn
+- Matplotlib
+
 **Brief about the Tutorial**
 
 The tutorial is inspired from the following paper, **Chandrasekaran *et al.*, "Chemogenomics and orthology‐based design of antibiotic combination therapies", *Mol Syst Biol (2016)12:872***, you can view the paper [here](https://www.embopress.org/doi/10.15252/msb.20156777).
