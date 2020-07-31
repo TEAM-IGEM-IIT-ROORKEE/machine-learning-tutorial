@@ -474,6 +474,21 @@ print(top_features)
 print('The feature is ',top_features[0,0].split('_')[0],' score of gene ',top_features[0,0].split('_')[1])
 ```
 
+**Orthology Mapping**
+
+Chemogenomic profiling data is widely available for *E.coli* while there is lack of such data for many species such as *S. aureus* and *M. tuberculosis*. 
+
+It is hypothesized that such an approach discussed above can be applied to other relevant pathogens by identifying orthologs of *E. coli*. 
+
+So, interactions in other pathogens can be modelled (or predicted) using chemogenomic profiling of *E. coli*, which is widely available through various dataset.
+
+*We have not discussed this implementation in detail but you can surely refer to the paper [here](https://www.embopress.org/doi/10.15252/msb.20156777) for more information*
+
+**Conclusion of the tutorial**
+
+This marks the end of this tutorial. I hope you enjoyed this tutorial and learnt on the way on how machine learning can be applied to biological setups, especially during interpretation of models to get better insights for experiments to be carried out.
+
+*Finally here is the link to one of the best courses on Machine Learning available [here](https://www.coursera.org/learn/machine-learning)*
 
 
 
