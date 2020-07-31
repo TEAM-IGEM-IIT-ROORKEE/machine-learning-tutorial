@@ -321,6 +321,158 @@ xval = np.array(xval)
 yval = np.array(yval)
 ```
 
+**Machine Learning Tasks**
+
+Generally, a machine learning task is of two types
+
+
+*   *Regression*: It involves the predicting a real value given set of features. For example, prediction of price of house based on its characteristics.
+
+*   *Classification*: It involves predicting the category to which a particular set of features belong to. For example, prediction of digit in a particular image.
+
+In the context of **Drug Combination Therapy**, *Regression* task would mean prediction of interaction score of a particular drug combination while *Classification* task would mean type of interaction *i.e.* synergistic, antagonistic or additive.
+
+In this tutorial, since we are predicting interaction score, it is a ***Regression*** task.
+
+**Machine Learning Algorithm**
+
+For this task, we used a machine learning algorithm called *Random Forests* which are further as ensemble of *Decision Trees*. 
+
+*Decision Trees* follow (adopt) a tree-like structure to model decisions. It will be more clear from the example/illustration displayed below.
+
+![alt text](https://drive.google.com/uc?export=view&id=1pyjldWPEygDF4f1-TVX3v_hd3hPfxzpK)
+
+Different boxes have different color represents different aspects as mentioned below
+
+
+
+*   *Yellow*: Splitting criteria, *i.e.* based on which splitting or decision needs to be taken.
+*   *Purple*: Decision outcome *i.e.* outcome of particular decision or splitting criteria
+*   *Green*: Positive outcome *i.e.* Yes
+*   *Red*: Negative outcome *i.e.* No
+
+We utilized *Random Forests* which are ensemble of these *Decision Trees*. *Ensembling* refers to combining predictive power of different models to produce a final model with a better predictive power than individual models.
+
+**Scikit-Learn** 
+
+Scikit-Learn is one of the most widely used python libraries for implementing machine learning algorithms. We also utilized Random Forest function provided by this library for our tutorial
+
+```
+#import dependencies or necessary libraries
+from sklearn.ensemble import RandomForestRegressor 
+from sklearn.metrics import r2_score # to check coefficient of determination
+from scipy.stats import spearmanr #to check for spearman correlation coefficient and p-value for significance
+```
+
+```
+#initialization of model
+rf_model = RandomForestRegressor()
+
+#training our model
+rf_model.fit(xtrain,ytrain)
+
+#validation of our model
+ptrain = rf_model.predict(xtrain)
+pval = rf_model.predict(xval)
+```
+
+```
+#performance evaluation
+print('Training Dataset Metrics\n')
+print('Coefficient of Determination: ',r2_score(ytrain,ptrain))
+print('Pearsons Correlation: ',np.corrcoef(ytrain,ptrain)[0,1])
+print('Spearman Correlation: ',spearmanr(ytrain,ptrain)[0])
+print('p-value: ',spearmanr(ytrain,ptrain)[1])
+print('\n\n')
+
+print('Validation Dataset Metrics\n')
+print('Coefficient of Determination: ',r2_score(yval,pval))
+print('Pearsons Correlation: ',np.corrcoef(yval,pval)[0,1])
+print('Spearman Correlation: ',spearmanr(yval,pval)[0])
+print('p-value: ',spearmanr(yval,pval)[1])
+```
+
+**Matplotlib**
+
+It is one of the most widely used python library for plotting and visualising results. We will use this library functions to plot actual and predicted scores.
+
+```
+#importing library
+import matplotlib.pyplot as plt
+```
+
+```
+#training set plot
+plt.scatter(ytrain,ptrain)
+plt.xlabel('Actual')
+plt.ylabel('Predicted')
+plt.plot()
+```
+
+```
+#clearing matplotlib plots
+plt.clf()
+```
+
+```
+#validation set plot
+plt.scatter(yval,pval)
+plt.xlabel('Actual')
+plt.ylabel('Predicted')
+plt.plot()
+```
+
+**Interpretation of Model's Result**
+
+The machine learning algorithm can be utilized for two purpose, 
+*   Prediction
+*   Interpretation
+
+In the recent times, focus has been on interpreting machine learning algorithms *i.e.* to see why machine learning algorithm is predicting a particular result. This interpretation of algorithms provides us with various insights to think upon and give new direction of thoughts.
+
+For example, in the current tutorial, we can interpret the model to find which feature is the most important in making predictions. 
+
+Since the features are sigma and delta scores achieved after preprocessing drug-gene interaction scores, interpretation of model may provide us with the most important gene pathway involved in drug combination therapy.
+
+*We will interpret our model results using scikit-learn function of providing importance weights to every particular feature*
+
+```
+#providing labels to each and every feature
+
+labels = []
+
+for i in range(xtrain.shape[-1]):
+  if i < 3853:
+    labels.append('Sigma_'+phenotype_labels[i])
+  else:
+    labels.append('Delta_'+phenotype_labels[i-3853])
+
+labels = np.array(labels)
+```
+
+```
+#feature importance array
+
+feature_importance = rf_model.feature_importances_
+
+#finding the top 20 features
+top_indexes = feature_importance.argsort()[-20:][::-1]
+```
+
+```
+top_features = labels[top_indexes]
+top_features = top_features.reshape(-1,1)
+```
+
+```
+print('Top Features \n')
+print(top_features)
+```
+
+```
+#conclusion of best feature
+print('The feature is ',top_features[0,0].split('_')[0],' score of gene ',top_features[0,0].split('_')[1])
+```
 
 
 
