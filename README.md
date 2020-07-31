@@ -10,6 +10,13 @@ The tutorial is inspired from the following paper, **Chandrasekaran *et al.*, "C
 
 It uses chemogenomic data profile of various antibiotics *i.e.* interaction between chemical drug and gene to predict interaction score between two antibiotics in *Escherichia coli*.
 
+```
+#importing necessary dependencies and libraries
+import pandas as pd
+import numpy as np
+from scipy.io import loadmat
+```
+
 **Chemogenomic Profiling**
 
 Chemogenomic profile measures fitness of gene‐knockout strains treated with a particular antibiotic.
@@ -19,3 +26,34 @@ The chemogenomic data profile of different antibiotics is made available from, *
 Here is the sample of chemogenomic profile of Amoxicillin in different conditions with different genes
 
 ![alt text](https://drive.google.com/uc?export=view&id=1ceOfjrS3L5vmm4UP_heQRCHhvU0FTUQt)
+
+```
+#different files 
+
+train_filename = './training.xlsx' 
+annotation_filename = './identify_match.xlsx'
+chemogenomics_filename = './phenotype_data.xlsx'
+validation_filename = './validation.xlsx'
+```
+
+```
+#chemogenomics data reading
+
+chemogenomics_file = pd.read_excel(chemogenomics_filename) # reading chemogenomics data file
+print('Chemogenomics - Sample')
+print(chemogenomics_file.head())
+```
+
+```
+probelist = chemogenomics_file.iloc[1:,0] # list of genes
+print('List of Genes - Sample')
+print(probelist.head())
+probelist = np.array(probelist)
+```
+
+```
+conditions = list(chemogenomics_file.keys()[1:]) #list of antibiotics or drug-conditions
+print('List of Antibioitcs - Sample')
+print(conditions)
+conditions = np.array(conditions)
+```
