@@ -1,9 +1,6 @@
 # Machine Learning Tutorial
 
-## Repository of Machine Learning presentation and tutorial presented by iGEM IIT Roorkee during All India iGEM Meet (AIIM) 2020 and will be presented at iGEM Global Meetup 2020
-
-### Timings of the session at iGEM Global Meetup 2020: August 20, 4:00 AM - 4:40 AM (UTC -4), 8.00 AM  - 8.40 AM (UTC), 1.30 PM - 2.10 PM (IST)
-**For joining session link, kindly visit [here](https://2020.igem.org/Teams/Global_Meetup)**
+## Repository of Machine Learning presentation and tutorial presented by iGEM IIT Roorkee during All India iGEM Meet (AIIM) 2020 and iGEM Global Meetup 2020
 
 **The link to the presentation, [here](https://docs.google.com/presentation/d/1egioXTv0U7mGOu5DrtRR655fpWKv1S_6CFvAzGCkXD0/edit?usp=sharing)** 
 
