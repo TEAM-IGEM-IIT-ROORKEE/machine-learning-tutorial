@@ -2,7 +2,7 @@
 
 ## Repository of Machine Learning presentation and tutorial presented by iGEM IIT Roorkee during All India iGEM Meet (AIIM) 2020 and iGEM Global Meetup 2020
 
-**The link to the presentation, [here](https://docs.google.com/presentation/d/1egioXTv0U7mGOu5DrtRR655fpWKv1S_6CFvAzGCkXD0/edit?usp=sharing)** 
+**The link to the presentation, [here](https://drive.google.com/file/d/1huP1ObD3fP0n7CTZn9-6228VLHCEOPTz/view?usp=sharing)** 
 
 **The link to the google colab notebook, [here](https://colab.research.google.com/drive/1NVUAwgoObyp-GtzC754SoPZKzVZ713oB)**
 
